@@ -4,9 +4,9 @@ import java.util.Date;
 
 public interface ITache {
 
-    void creerTache(String createur, String description, Date date, Status status, boolean resolution);
+    void creerTache(String createur, String description, Date date, Status status, boolean resolution) throws TacheException;
     void annulerTache();
-    void replanifierTache(String createur, String description, Date date, Status status, boolean resolution);
+    void replanifierTache(String createur, Date date);
     Tache consuterTache();
-    Tache consulterTacheAutre(String createur);
+    void consulterTacheAutre(String createur);
 }

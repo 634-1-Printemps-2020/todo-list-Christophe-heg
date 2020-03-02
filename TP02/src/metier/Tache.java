@@ -10,7 +10,11 @@ public class Tache implements ITache{
     private Status status;
     private boolean resolution;
 
-    public Tache(String createur, String description, Date date, Status status, boolean resolution) {
+    public Tache(String createur, String description, Date date, Status status, boolean resolution) throws TacheException{
+
+        if(new Date().compareTo(date) < 0 ){
+            throw new TacheException("La date ne peut pas etre plus petite que la date du jour");
+        }
         this.createur = createur;
         this.description = description;
         this.date = date;
@@ -19,7 +23,7 @@ public class Tache implements ITache{
     }
 
     @Override
-    public void creerTache(String createur, String description, Date date, Status status, boolean resolution) {
+    public void creerTache(String createur, String description, Date date, Status status, boolean resolution) throws TacheException{
         new Tache(createur, description, date, status, resolution);
     }
 
@@ -29,21 +33,30 @@ public class Tache implements ITache{
     }
 
     @Override
-    public void replanifierTache(String createur, String description, Date date, Status status, boolean resolution) {
+    public void replanifierTache(String createur, Date date) {
         this.createur = createur;
-        this.description = description;
         this.date = date;
-        this.status = status;
-        this.resolution = resolution;
     }
 
     @Override
     public Tache consuterTache() {
-       return
+        return this;
     }
 
     @Override
-    public Tache consulterTacheAutre(String createur) {
+    public void consulterTacheAutre(String createur) {
 
+    }
+
+    public Tache getTache(){
+        return this;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }
